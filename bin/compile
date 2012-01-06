@@ -46,7 +46,7 @@ fi
 curl --silent --max-time 10 --location $MAVEN_SETTINGS_URL --output .m2/settings.xml
 echo " done"
 
-AGENT_URL="http://heroku-jvm-langpack-java.s3.amazonaws.com/heroku-agent.jar"A
+AGENT_URL="http://heroku-jvm-langpack-java.s3.amazonaws.com/heroku-agent.jar"
 
 if [ ! -f heroku-agent.jar ]; then
     echo -n "-----> Installing javaagent....."
