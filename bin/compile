@@ -46,6 +46,14 @@ fi
 curl --silent --max-time 10 --location $MAVEN_SETTINGS_URL --output .m2/settings.xml
 echo " done"
 
+AGENT_URL="http://heroku-jvm-langpack-java.s3.amazonaws.com/heroku-agent.jar"A
+
+if [ ! -f heroku-agent.jar ]; then
+    echo -n "-----> Installing javaagent....."
+    curl --silent --max-time 20 --location $AGENT_URL --output heroku-agent.jar 
+    echo " done"
+fi
+
 # change to build dir to run maven
 cd $BUILD_DIR
 
