@@ -75,7 +75,12 @@ echo -n "-----> Installing settings.xml..."
 if [ -f .m2/settings.xml ]; then
   rm .m2/settings.xml 
 fi
-curl --silent --max-time 10 --location $MAVEN_SETTINGS_URL --output .m2/settings.xml
+
+if [ -f $BUILD_DIR/settings.xml ]; then
+  cp $BUILD_DIR/settings.xml .m2/settings.xml
+elif
+  curl --silent --max-time 10 --location $MAVEN_SETTINGS_URL --output .m2/settings.xml
+fi
 echo " done"
 
 # change to build dir to run maven
