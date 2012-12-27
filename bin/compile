@@ -71,19 +71,24 @@ fi
 
 MAVEN_SETTINGS_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/settings.xml"
 
-echo -n "-----> Installing settings.xml..."
+echo "-----> Installing settings.xml..."
 if [ -f .m2/settings.xml ]; then
   rm .m2/settings.xml 
+fi
+if [ -f .m2/settings-security.xml ]; then
+  rm .m2/settings-security.xml
 fi
 
 if [ -f $BUILD_DIR/settings.xml ]; then
   cp $BUILD_DIR/settings.xml .m2/settings.xml
+  echo "using custom settings.xml"
 else
   curl --silent --max-time 10 --location $MAVEN_SETTINGS_URL --output .m2/settings.xml
 fi
 
 if [ -f $BUILD_DIR/settings-security.xml ]; then
   cp $BUILD_DIR/settings-security.xml .m2/settings-security.xml
+  echo "using custom settings-security.xml"
 fi
 echo " done"
 
