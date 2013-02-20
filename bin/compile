@@ -12,6 +12,12 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 LOGGER_FLAGS=""
 
+# Clear Cache
+rm -rf $CACHE_DIR/*
+rm -rf $CACHE_DIR/.maven
+rm -rf $CACHE_DIR/.m2
+rm -rf $CACHE_DIR/.jdk
+
 curl --silent --location http://heroku-jvm-common.s3.amazonaws.com/jvm-buildpack-common.tar.gz | tar xz
 . bin/java
 
@@ -58,11 +64,6 @@ fi
 
 # change to cache dir to install maven
 cd $CACHE_DIR
-# clear cache
-rm -rf *
-rm -rf .maven
-rm -rf .m2
-
 
 # install maven with base repository
 MAVEN_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/maven.tar.gz"
